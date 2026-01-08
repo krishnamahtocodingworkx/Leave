@@ -1,0 +1,12 @@
+/* .bg-white shadow-sm px-5 */
+.navbar-container {
+  background: var(--color-white);
+  padding: 0px 2vw;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
