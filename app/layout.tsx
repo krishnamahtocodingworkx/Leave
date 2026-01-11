@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Poppins } from "next/font/google";
+import { Geist, Geist_Mono, Poppins, Nunito } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/common/navbar/Navbar";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
@@ -22,6 +22,11 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
+const nunito = Nunito({
+  variable: "--font-nunito",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "Stillo - Buy and Sell Products",
   description: "An e-commerce platform to buy and sell products easily.",
@@ -39,7 +44,7 @@ export default function RootLayout({
       <AppRouterCacheProvider>
         <MuiThemeProvider>
           <body
-            className={`${geistSans.variable} ${poppins.variable} ${geistMono.variable}  `}
+            className={`${geistSans.variable} ${poppins.variable} ${geistMono.variable} ${nunito.variable} `}
           >
             <Navbar />
             {children}

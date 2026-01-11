@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./../components/catergories/style.css";
+
 :root {
   /* Base Colors */
   --color-white: #ffffff;
@@ -60,6 +61,7 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-poppins: var(--font-poppins);
+  --font-nunito: var(--font-nunito);
 }
 
 body {

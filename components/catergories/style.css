@@ -4,6 +4,8 @@
   gap: 24px;
   padding: 24px;
   background: var(--color-bg-surface);
+  position: relative; /* creates stacking context */
+  z-index: 100;
 }
 
 /* ================= Card ================= */

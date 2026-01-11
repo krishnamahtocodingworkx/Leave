@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Image from "next/image";
+import "./style.css";
 
 const banners = [
     "https://images.unsplash.com/photo-1556911220-bff31c812dba?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8a2l0Y2hlbnxlbnwwfHwwfHx8MA%3D%3D",
@@ -16,13 +17,13 @@ const banners = [
 
 export default function HomeBannerSlider() {
     return (
-        <div className="relative w-full">
+        <div className="relative w-full z-1">
             <Swiper
                 modules={[Navigation, Pagination, Autoplay]}
                 slidesPerView={1}
                 loop
                 autoplay={{
-                    delay: 4000,
+                    delay: 4000000,
                     disableOnInteraction: false,
                 }}
                 navigation

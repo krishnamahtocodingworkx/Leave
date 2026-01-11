@@ -1,0 +1,39 @@
+/* Base arrow buttons */
+.home-swiper .swiper-button-prev,
+.home-swiper .swiper-button-next {
+  width: 36px; /* 🔥 size */
+  height: 56px;
+  background: var(--color-bg-surface);
+  border-radius: 5%;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  color: var(--color-primary);
+  transition: all 0.25s ease;
+}
+
+/* Remove default giant arrows */
+.home-swiper .swiper-button-prev::after,
+.home-swiper .swiper-button-next::after {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+/* Hover effect (Flipkart-style) */
+.home-swiper .swiper-button-prev:hover,
+.home-swiper .swiper-button-next:hover {
+  background: var(--color-primary);
+  color: white;
+  transform: scale(1.05);
+}
+
+.home-swiper .swiper-button-prev {
+  left: 1px;
+}
+
+.home-swiper .swiper-button-next {
+  right: 1px;
+}
+.swiper-navigation-icon {
+  height: 18px !important;
+  width: 18px !important;
+  font-weight: 900 !important;
+}
