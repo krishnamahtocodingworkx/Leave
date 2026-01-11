@@ -12,7 +12,7 @@ const Navbar = () => {
     return (
         <header className='navbar-container'>
             <nav className='navbar'>
-                <h1 className="font-poppins text-4xl font-bold"><span className='text-warning'>Leave</span><span className='text-primary'>It</span></h1>
+                <h1 className="font-poppins text-4xl font-bold"><span className='text-primary'>still</span><span className='text-warning'>o</span></h1>
 
                 <div className='flex items-center gap-2 px-4 py-2 rounded-2xl bg-input'>
                     <FiSearch />
@@ -20,7 +20,7 @@ const Navbar = () => {
                 </div>
 
                 <div className='flex items-center gap-5 text-2xl'>
-                    <Link href={"/"} className='flex items-center gap-2 text-lg'>
+                    <Link href={"/login"} className='flex items-center gap-2 text-lg'>
                         <CgProfile />
                         <p>Login</p>
                     </Link>

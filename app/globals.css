@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@import "./../components/catergories/style.css";
 :root {
   /* Base Colors */
   --color-white: #ffffff;
@@ -63,7 +63,6 @@
 }
 
 body {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
-  font-family: var(--font-sans, Arial, Helvetica, sans-serif);
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
 }

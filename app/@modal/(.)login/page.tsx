@@ -24,7 +24,6 @@ const overlayStyle: React.CSSProperties = {
 };
 
 const modalStyle = {
-    background: "#fff",
     padding: 20,
     margin: "100px auto",
     width: 300,

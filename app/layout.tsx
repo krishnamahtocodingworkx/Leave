@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/common/navbar/Navbar";
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
+import MuiThemeProvider from "./theme-provider";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,7 +23,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "LeaveIt",
+  title: "Stillo - Buy and Sell Products",
   description: "An e-commerce platform to buy and sell products easily.",
 };
 
@@ -33,13 +36,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${poppins.variable} ${geistMono.variable} antialiased bg-background`}
-      >
-        <Navbar />
-        {children}
-        {modal}
-      </body>
+      <AppRouterCacheProvider>
+        <MuiThemeProvider>
+          <body
+            className={`${geistSans.variable} ${poppins.variable} ${geistMono.variable}  `}
+          >
+            <Navbar />
+            {children}
+            {modal}
+          </body>
+        </MuiThemeProvider>
+      </AppRouterCacheProvider>
     </html>
   );
 }
