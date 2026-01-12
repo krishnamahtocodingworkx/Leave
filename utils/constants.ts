@@ -9,25 +9,17 @@ export const navItems: NavItems[] = [
         name: "About",
         href: "/about",
     },
-    {
-        name: "Services",
-        href: "/services",
-    },
-    {
-        name: "Physical Programs",
-        href: "/physical",
-    },
-    {
-        name: "Digital Programs",
-        href: "/digital",
-    },
-    {
-        name: "Blog",
-        href: "/blog",
-    },
 
     {
         name: "Contact Us",
         href: "/contact",
     },
+    {
+        name: "Login",
+        href: "/login",
+    },
+    {
+        name: " Sign Up",
+        href: "/signup",
+    }
 ];

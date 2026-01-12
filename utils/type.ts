@@ -3,18 +3,19 @@ import { ProductCategory, ProductSubCategory } from "./enum";
 export type ProductCategoryType = { label: string, value: ProductCategory, imgUrl: string, options: { label: string, value: ProductSubCategory }[] }
 
 
+// utils/type.ts
 export interface InputFieldProps {
-    required?: boolean;
+    name: string;
     value: string;
     changeHandler: React.ChangeEventHandler<HTMLInputElement>;
-    onBlur?: React.FocusEventHandler<HTMLInputElement>;
+    onBlur: React.FocusEventHandler<HTMLInputElement>;
     label?: string;
-    name: string;
     placeHolder?: string;
+    required?: boolean;
     error?: string;
     touched?: boolean;
-    errormessage?: string;
     type?: React.HTMLInputTypeAttribute;
     disabled?: boolean;
 }
+
 export type NavItems = { name: string; href: string };
