@@ -1,4 +1,5 @@
-import React from 'react'
+"use client";
+import React, { useEffect, useRef, useState } from 'react'
 import { CgProfile } from "react-icons/cg";
 import { FiSearch } from "react-icons/fi";
 import { FiShoppingCart } from "react-icons/fi";
@@ -7,34 +8,151 @@ import { IoBagAdd } from "react-icons/io5";
 
 import "./Navbar.css";
 import Link from 'next/link';
+import HamburgerButton from './HamburgerButton';
+import { navItems } from '@/utils/constants';
+import { NavItems } from '@/utils/type';
+import { usePathname } from 'next/navigation';
+import gsap from "gsap";
 
 const Navbar = () => {
-    return (
-        <header className='navbar-container'>
-            <nav className='navbar'>
-                <h1 className="font-poppins text-4xl font-bold"><span className='text-primary'>still</span><span className='text-warning'>o</span></h1>
+    const pathname = usePathname();
+    const [showMobileMenu, setShowMobileMenu] = useState(false);
+    const menuContainerRef = useRef<HTMLDivElement>(null);
+    const menuRef = useRef<HTMLDivElement>(null);
+    const navItemsRef = useRef<HTMLAnchorElement[]>([]);
+    const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
+    useEffect(() => {
+        if (!menuContainerRef.current || !menuRef.current) return;
+
+        const tl = gsap.timeline({ paused: true });
+        timelineRef.current = tl;
+
+        gsap.set(menuContainerRef.current, {
+            scaleX: 0,
+            transformOrigin: "right center",
+        });
+        gsap.set(menuRef.current, { x: "-100%" });
+        gsap.set(navItemsRef.current, { opacity: 0, x: -30 });
+
+        tl.to(menuContainerRef.current, {
+            scaleX: 1,
+            duration: 0.4,
+            ease: "power2.inOut",
+        })
+            .to(menuRef.current, {
+                x: 0,
+                duration: 0.4,
+                ease: "power2.out",
+            })
+            .to(navItemsRef.current, {
+                opacity: 1,
+                x: 0,
+                duration: 0.3,
+                ease: "power2.out",
+                stagger: 0.08,
+            });
+    }, []);
+
+    // Control animation direction
+    useEffect(() => {
+        if (timelineRef.current) {
+            showMobileMenu
+                ? timelineRef.current.timeScale(1.2).play()
+                : timelineRef.current.timeScale(1.8).reverse();
+        }
+    }, [showMobileMenu]);
+    return (
+        <nav className='navbar'>
+            <div className="navbar-logo-container">
+                <div className="mobile-only-display  flex justify-center items-center">
+                    <HamburgerButton
+                        isOpen={showMobileMenu}
+                        toggle={() => setShowMobileMenu((prev) => !prev)}
+                    />
+                </div>
+                {/* <Image
+                    src="/navbar-logo.svg"
+                    height={30}
+                    width={100}
+                    alt="Mind craft logo"
+                    className="navbar-logo cursor-pointer"
+                    onClick={() => {
+                        router.push("/");
+                    }}
+                /> */}
+                <h1 className="font-poppins text-4xl font-bold"><span className='text-primary'>still</span><span className='text-warning'>o</span></h1>
+            </div>
+
+            <div className="nav-items-container desktop-only-display">
+                {navItems.map((item: NavItems, index) => {
+                    const isActive = pathname === item.href;
+                    return (
+                        <Link
+                            href={item.href}
+                            key={index}
+                            className={`nav-item ${isActive ? "active-nav-item" : ""}`}
+                        >
+                            {item.name}
+                        </Link>
+                    );
+                })}
                 <div className='flex items-center gap-2 px-4 py-2 rounded-2xl bg-input'>
                     <FiSearch />
                     <input className='outline-none' placeholder='Search for products...' />
                 </div>
+            </div>
 
-                <div className='flex items-center gap-5 text-2xl'>
-                    <Link href={"/login"} className='flex items-center gap-2 text-lg'>
-                        <CgProfile />
-                        <p>Login</p>
-                    </Link>
-                    <Link href={"/"} className='flex items-center gap-2 text-lg'>
-                        <FiShoppingCart />
-                        <p>Cart</p>
-                    </Link>
-                    <Link href={"/"} className='flex items-center gap-2 text-lg'>
-                        <BsShop />
-                        <p>Sell Stuff</p>
-                    </Link>
+
+            <div
+                onClick={() => setShowMobileMenu((prev) => !prev)}
+                ref={(ref) => {
+                    if (ref) menuContainerRef.current = ref;
+                }}
+                className="mobile-nav-menu-container mobile-only-display"
+            >
+                <div
+                    ref={(ref) => {
+                        if (ref) menuRef.current = ref;
+                    }}
+                    className="mobile-nav-items-container "
+                >
+                    {navItems.map((item, index) => {
+                        const isActive = pathname === item.href;
+                        return (
+                            <Link
+                                href={item.href}
+                                ref={(ref) => {
+                                    if (ref) navItemsRef.current[index] = ref;
+                                }}
+                                key={index}
+                                className={`mobile-nav-item   ${isActive ? "active-nav-item" : ""
+                                    }`}
+                            >
+                                {item.name}
+                            </Link>
+                        );
+                    })}
                 </div>
-            </nav>
-        </header>
+            </div>
+
+
+
+            {/* <div className='flex items-center gap-5 text-2xl'>
+                <Link href={"/login"} className='flex items-center gap-2 text-lg'>
+                    <CgProfile />
+                    <p>Login</p>
+                </Link>
+                <Link href={"/"} className='flex items-center gap-2 text-lg'>
+                    <FiShoppingCart />
+                    <p>Cart</p>
+                </Link>
+                <Link href={"/"} className='flex items-center gap-2 text-lg'>
+                    <BsShop />
+                    <p>Sell Stuff</p>
+                </Link>
+            </div> */}
+        </nav>
     )
 }
 
