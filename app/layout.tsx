@@ -47,6 +47,7 @@ export default function RootLayout({
             className={`${geistSans.variable} ${poppins.variable} ${geistMono.variable} ${nunito.variable} `}
           >
             <Navbar />
+            <div className="h-16" />
             {children}
             {modal}
           </body>

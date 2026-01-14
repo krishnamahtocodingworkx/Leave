@@ -1,11 +1,16 @@
+.categories-container {
+  width: 100vw;
+  position: relative;
+  overflow-x: auto;
+  background: var(--color-bg-surface);
+}
 .categories-section {
   display: flex;
   justify-content: center;
   gap: 24px;
   padding: 24px;
-  background: var(--color-bg-surface);
   position: relative; /* creates stacking context */
-  z-index: 100;
+  z-index: 1000;
 }
 
 /* ================= Card ================= */
@@ -103,4 +108,20 @@
 .category-option:hover {
   background: var(--color-bg-input);
   color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .categories-section {
+    justify-content: start;
+  }
+  .category-card {
+    width: 120px;
+    padding: 12px 12px;
+    gap: 5px;
+    justify-content: space-between;
+  }
+  .category-title {
+    font-size: 12px;
+    text-wrap: nowrap;
+  }
 }

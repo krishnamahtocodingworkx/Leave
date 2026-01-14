@@ -9,8 +9,9 @@ import { useRouter } from "next/navigation";
 
 const CategoryCard = ({ category }: { category: ProductCategoryType }) => {
     const router = useRouter();
+    // onClick={() => router.push(category.value)}
     return (
-        <div className="category-card" onClick={() => router.push(category.value)} >
+        <div className="category-card" >
             <Image
                 src={category.imgUrl}
                 className="category-image"
@@ -37,14 +38,16 @@ const CategoryCard = ({ category }: { category: ProductCategoryType }) => {
 
 const Categories = () => {
     return (
-        <section className="categories-section">
-            {
-                ProductCategories.map((category, index) => (
-                    <CategoryCard key={index} category={category} />
-                )
-                )
-            }
-        </section>
+        <div className="categories-container">
+            <section className="categories-section">
+                {
+                    ProductCategories.map((category, index) => (
+                        <CategoryCard key={index} category={category} />
+                    )
+                    )
+                }
+            </section>
+        </div>
     );
 };
 

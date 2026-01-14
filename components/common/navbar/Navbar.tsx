@@ -81,10 +81,10 @@ const Navbar = () => {
                         router.push("/");
                     }}
                 /> */}
-                <h1 className="font-poppins text-4xl font-bold"><span className='text-primary'>still</span><span className='text-warning'>o</span></h1>
+                <Link href={"/"} aria-label='base route' className="font-poppins text-4xl font-bold"><span className='text-primary'>still</span><span className='text-warning'>o</span></Link>
             </div>
 
-            <div className='flex items-center gap-2 my-2 px-4 py-2 rounded-2xl bg-input'>
+            <div className='desktop-only-display flex items-center gap-2 my-2 px-4 py-2 rounded-2xl bg-input'>
                 <FiSearch />
                 <input className='outline-none' placeholder='Search for products...' />
             </div>
@@ -92,12 +92,16 @@ const Navbar = () => {
             <div className="nav-items-container desktop-only-display">
                 {navItems.map((item: NavItems, index) => {
                     const isActive = pathname === item.href;
+
                     return (
                         <Link
                             href={item.href}
                             key={index}
-                            className={`nav-item ${isActive ? "active-nav-item" : ""}`}
+                            className={`nav-item ${isActive ? "active-nav-item" : ""} flex items-center gap-2`}
                         >
+                            {item.icon && (
+                                <span className="nav-item-icon">{<item.icon />}</span>
+                            )}
                             {item.name}
                         </Link>
                     );
@@ -120,6 +124,7 @@ const Navbar = () => {
                 >
                     {navItems.map((item, index) => {
                         const isActive = pathname === item.href;
+                        const Icon = item.icon;
                         return (
                             <Link
                                 href={item.href}
@@ -131,6 +136,11 @@ const Navbar = () => {
                                     }`}
                             >
                                 {item.name}
+                                {
+                                    Icon && (
+                                        <span className="mobile-nav-item-icon">{<Icon />}</span>
+                                    )
+                                }
                             </Link>
                         );
                     })}

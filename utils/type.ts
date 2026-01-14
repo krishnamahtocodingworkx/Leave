@@ -1,3 +1,4 @@
+import { IconType } from "react-icons/lib";
 import { ProductCategory, ProductSubCategory } from "./enum";
 
 export type ProductCategoryType = { label: string, value: ProductCategory, imgUrl: string, options: { label: string, value: ProductSubCategory }[] }
@@ -18,4 +19,4 @@ export interface InputFieldProps {
     disabled?: boolean;
 }
 
-export type NavItems = { name: string; href: string };
+export type NavItems = { name: string; href: string, icon?: IconType };
