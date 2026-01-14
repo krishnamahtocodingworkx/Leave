@@ -1,16 +1,12 @@
-.categories-container {
-  width: 100vw;
-  position: relative;
-  overflow-x: auto;
-  background: var(--color-bg-surface);
-}
 .categories-section {
+  background: var(--color-bg-surface);
   display: flex;
   justify-content: center;
   gap: 24px;
   padding: 24px;
   position: relative; /* creates stacking context */
-  z-index: 1000;
+  z-index: 10;
+  width: 100%;
 }
 
 /* ================= Card ================= */

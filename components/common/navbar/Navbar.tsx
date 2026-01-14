@@ -132,15 +132,15 @@ const Navbar = () => {
                                     if (ref) navItemsRef.current[index] = ref;
                                 }}
                                 key={index}
-                                className={`mobile-nav-item   ${isActive ? "active-nav-item" : ""
+                                className={`mobile-nav-item flex gap-2 items-center   ${isActive ? "active-nav-item" : ""
                                     }`}
                             >
-                                {item.name}
                                 {
                                     Icon && (
                                         <span className="mobile-nav-item-icon">{<Icon />}</span>
                                     )
                                 }
+                                {item.name}
                             </Link>
                         );
                     })}

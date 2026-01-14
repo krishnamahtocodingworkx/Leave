@@ -9,7 +9,6 @@ export default function Home() {
       <HomeBannerSlider />
       <CardSlider />
       <h1>Home Page</h1>
-      {/* <Link href="/login">Open Login Modal</Link> */}
     </div>
   );
 }
