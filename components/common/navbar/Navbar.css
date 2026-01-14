@@ -53,7 +53,7 @@
   font-weight: 600;
   font-size: 1.3vw;
   font-family: var(--font-poppins);
-  color: var(--primary);
+  color: var(--color-black);
   text-decoration: none;
   text-transform: uppercase;
   margin-bottom: 5px;
@@ -67,7 +67,7 @@
   top: 0; /* was top: 0 before, use bottom for underlining */
   width: 100%;
   height: 3px;
-  background-color: var(--secondary);
+  background-color: var(--color-primary);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s ease;
@@ -78,14 +78,14 @@
   transform: scaleX(1);
 }
 .nav-item:hover {
-  color: var(--secondary);
+  color: var(--color-primary);
   background: #3d3d3d05;
 }
 
 /* active nav item styling */
 .active-nav-item {
   background: #3d3d3d05;
-  color: var(--secondary);
+  color: var(--color-primary);
 }
 
 /* show the underline persistently for active item */
@@ -108,7 +108,7 @@
   top: 0;
   left: -1px;
   width: 70%;
-  background: var(--background);
+  background: var(--color-white);
   box-shadow: 0.57px 2.83px 7.93px 0px #4b00811f;
   border-radius: 0 0 5px 0;
   display: flex;
@@ -122,7 +122,7 @@
   font-weight: 600;
   font-size: 1rem;
   font-family: var(--font-poppins);
-  color: var(--primary);
+  color: var(--color-black);
   text-transform: uppercase;
   transition: color 0.3s ease;
   cursor: pointer;
@@ -134,7 +134,7 @@
   top: 0; /* was top: 0 before, use bottom for underlining */
   height: 100%;
   width: 4px;
-  background-color: var(--secondary);
+  background-color: var(--color-white);
   transform: scaleX(0);
   transform-origin: center;
   transition: transform 0.3s ease;
@@ -146,7 +146,7 @@
   transform: scaleX(1);
 }
 .mobile-nav-item:hover {
-  color: var(--secondary);
+  color: var(--color-white);
   background: #3d3d3d05;
 }
 /* STYLE for smaller DISPLAY */
@@ -167,7 +167,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 3vw;
-    border-radius: 0 0 20px 20px;
     background: var(--color-white);
 
     /* backdrop-filter: blur(10px); */
@@ -204,7 +203,7 @@
     font-weight: 600;
     font-size: 1vw;
     font-family: var(--font-poppins);
-    color: var(--primary);
+    color: var(--color-black);
     text-decoration: none;
     text-transform: uppercase;
     margin-bottom: 5px;
@@ -217,7 +216,7 @@
     font-weight: 600;
     font-size: 1vw;
     font-family: var(--font-poppins);
-    color: var(--primary);
+    color: var(--color-black);
     text-decoration: none;
     text-transform: uppercase;
     margin-bottom: 5px;
@@ -225,7 +224,7 @@
     transition: color 0.3s ease;
   }
   .contact-item:hover {
-    color: var(--secondary);
+    color: var(--color-primary);
   }
   /* underline pseudo-element */
   .nav-item::after {
@@ -235,7 +234,7 @@
     top: 0; /* was top: 0 before, use bottom for underlining */
     width: 100%;
     height: 3px;
-    background-color: var(--secondary);
+    background-color: var(--color-warning);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s ease;
@@ -246,13 +245,13 @@
     transform: scaleX(1);
   }
   .nav-item:hover {
-    color: var(--secondary);
+    color: var(--color-primary);
   }
 
   /* active nav item styling */
   .active-nav-item {
     background: #3d3d3d05;
-    color: var(--secondary);
+    color: var(--color-primary);
   }
 
   /* show the underline persistently for active item */
@@ -265,7 +264,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* border: 1px solid var(--primary); */
+    /* border: 1px solid var(--color-black); */
     gap: 0.5vw;
   }
   .call-icon-container {
@@ -273,7 +272,7 @@
     align-items: center;
     justify-content: center;
     padding: 0.6vw;
-    background: var(--primary);
+    background: var(--color-black);
     border-radius: 100%;
   }
 }

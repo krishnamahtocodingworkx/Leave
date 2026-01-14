@@ -84,6 +84,11 @@ const Navbar = () => {
                 <h1 className="font-poppins text-4xl font-bold"><span className='text-primary'>still</span><span className='text-warning'>o</span></h1>
             </div>
 
+            <div className='flex items-center gap-2 my-2 px-4 py-2 rounded-2xl bg-input'>
+                <FiSearch />
+                <input className='outline-none' placeholder='Search for products...' />
+            </div>
+
             <div className="nav-items-container desktop-only-display">
                 {navItems.map((item: NavItems, index) => {
                     const isActive = pathname === item.href;
@@ -97,10 +102,6 @@ const Navbar = () => {
                         </Link>
                     );
                 })}
-                <div className='flex items-center gap-2 px-4 py-2 rounded-2xl bg-input'>
-                    <FiSearch />
-                    <input className='outline-none' placeholder='Search for products...' />
-                </div>
             </div>
 
 
