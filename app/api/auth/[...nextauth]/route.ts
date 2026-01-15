@@ -1,0 +1,34 @@
+import { ENV } from "@/utils/env";
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+
+const handler = NextAuth({
+    providers: [
+        GoogleProvider({
+            clientId: ENV.GOOGLE_CLIENT_ID,
+            clientSecret: ENV.GOOGLE_CLIENT_SECRET,
+        }),
+    ],
+
+    session: {
+        strategy: "jwt",
+    },
+
+    callbacks: {
+        async jwt({ token, account }) {
+            if (account) {
+                token.idToken = account.id_token;
+                token.accessToken = account.access_token;
+            }
+            return token;
+        },
+
+        async session({ session, token }) {
+            session.idToken = token.idToken;
+            session.accessToken = token.accessToken;
+            return session;
+        },
+    },
+});
+
+export { handler as GET, handler as POST };

@@ -8,3 +8,6 @@ export const IMAGES = {
     study: '/images/study.png',
     dailyUse: '/images/daily-use.png',
 }
+export const ICONS = {
+    google: '/icons/google.png',
+}

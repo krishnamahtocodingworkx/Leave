@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/common/navbar/Navbar";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import MuiThemeProvider from "./theme-provider";
+import { Toaster } from "react-hot-toast";
+import Providers from "./providers";
 
 
 const geistSans = Geist({
@@ -41,18 +43,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <AppRouterCacheProvider>
-        <MuiThemeProvider>
-          <body
-            className={`${geistSans.variable} ${poppins.variable} ${geistMono.variable} ${nunito.variable} `}
-          >
-            <Navbar />
-            <div className="h-16" />
-            {children}
-            {modal}
-          </body>
-        </MuiThemeProvider>
-      </AppRouterCacheProvider>
+      <Providers>
+        <AppRouterCacheProvider>
+          <MuiThemeProvider>
+            <body
+              className={`${geistSans.variable} ${poppins.variable} ${geistMono.variable} ${nunito.variable} `}
+            >
+              <Navbar />
+              <div className="h-16" />
+              {children}
+              {modal}
+              <Toaster />
+            </body>
+          </MuiThemeProvider>
+        </AppRouterCacheProvider>
+      </Providers>
     </html>
   );
 }

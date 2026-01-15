@@ -1,31 +1,23 @@
 "use client";
 
+import RouteModal from "@/components/modals/RouteModal";
 import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function SignupModal() {
-    const router = useRouter();
 
     return (
-        <div style={overlayStyle}>
-            <div style={modalStyle}>
-                <h2>Signup</h2>
-                <button onClick={() => router.back()}>Close</button>
+        <RouteModal>
+            <div className="flex flex-col gap-4">
+                <h2 className="font-nunito text-xl font-semibold text-gray-800">
+                    Signup Modal
+                </h2>
+                <p className="text-gray-600">
+                    This is a placeholder for the signup form. Implement the form fields and submission logic as needed.
+                </p>
             </div>
-        </div>
+        </RouteModal>
     );
 }
 
-const overlayStyle: React.CSSProperties = {
-    position: "fixed",
-    inset: 0,
-    background: "rgba(0,0,0,0.5)",
-    zIndex: 1000,
-};
 
-const modalStyle = {
-    padding: 20,
-    margin: "100px auto",
-    width: 300,
-    background: "#fff",
-};

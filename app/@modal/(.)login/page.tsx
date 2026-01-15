@@ -2,16 +2,17 @@
 
 import Input from "@/components/input";
 import PasswordInput from "@/components/input/PasswordInput";
-import CustomModal from "@/components/modal";
+import CustomModal from "@/components/modals";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useFormik } from "formik";
 import { LoginSchema } from "@/utils/schema";
+import RouteModal from "@/components/modals/RouteModal";
+import GoogleButton from "@/components/common/buttons/GoogleButton";
 
 export default function LoginModal() {
     const router = useRouter();
-    const [open, setOpen] = React.useState(true);
 
     const loginForm = useFormik({
         initialValues: {
@@ -26,7 +27,7 @@ export default function LoginModal() {
                 console.log("Login Payload:", values);
                 // await loginApi(values)
                 actions.resetForm();
-                setOpen(false);
+                // setOpen(false);
             } catch (error) {
                 console.error(error);
             } finally {
@@ -36,7 +37,7 @@ export default function LoginModal() {
     });
 
     return (
-        <CustomModal open={open} setOpen={setOpen} size="medium">
+        <RouteModal>
             <form
                 onSubmit={loginForm.handleSubmit}
                 className="flex flex-col gap-4"
@@ -82,24 +83,13 @@ export default function LoginModal() {
                     Don&apos;t have an account?{" "}
                     <Link
                         href="/signup"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            router.push("/signup");
-                        }}
                         className="text-blue-500 underline"
                     >
                         Sign up
                     </Link>
                 </p>
-
-                <button
-                    type="button"
-                    onClick={() => router.back()}
-                    className="text-sm text-gray-500 underline"
-                >
-                    Close
-                </button>
             </form>
-        </CustomModal>
+            <GoogleButton />
+        </RouteModal>
     );
 }

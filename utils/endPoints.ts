@@ -1,5 +1,6 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+import { ENV } from "./env";
+
 export const ENDPOINTS = {
-    GET_ALL_PRODUCTS: BASE_URL + "/products",
-    GET_PRODUCT_DETAILS: (id: string) => `${BASE_URL}/products/${id}`
+    LOGIN: `${ENV.API_BASE_URL}/api/v1/user/login`,
+    SIGNUP: `${ENV.API_BASE_URL}/api/v1/auth/signup`,
 }

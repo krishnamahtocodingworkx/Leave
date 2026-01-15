@@ -81,13 +81,15 @@ const Navbar = () => {
                         router.push("/");
                     }}
                 /> */}
-                <Link href={"/"} aria-label='base route' className="font-poppins text-4xl font-bold"><span className='text-primary'>still</span><span className='text-warning'>o</span></Link>
+                <Link href={"/"} aria-label='base route' className="font-poppins text-4xl font-bold"><span className='text-primary'>CWX</span><span className='text-warning'>Next</span></Link>
+
+                {/* <Link href={"/"} aria-label='base route' className="font-poppins text-4xl font-bold"><span className='text-primary'>still</span><span className='text-warning'>o</span></Link> */}
             </div>
 
-            <div className='desktop-only-display flex items-center gap-2 my-2 px-4 py-2 rounded-2xl bg-input'>
+            {/* <div className='desktop-only-display flex items-center gap-2 my-2 px-4 py-2 rounded-2xl bg-input'>
                 <FiSearch />
                 <input className='outline-none' placeholder='Search for products...' />
-            </div>
+            </div> */}
 
             <div className="nav-items-container desktop-only-display">
                 {navItems.map((item: NavItems, index) => {
