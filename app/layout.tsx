@@ -6,6 +6,7 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import MuiThemeProvider from "./theme-provider";
 import { Toaster } from "react-hot-toast";
 import Providers from "./providers";
+import ReduxProvider from "@/store/ReduxProvider";
 
 
 const geistSans = Geist({
@@ -30,8 +31,10 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "Stillo - Buy and Sell Products",
-  description: "An e-commerce platform to buy and sell products easily.",
+  // title: "Stillo - Buy and Sell Products",
+  title: "CW-NextJS Template",
+  description: "A Next.js template with MUI, Tailwind CSS, and Google Fonts integration.",
+  // description: "An e-commerce platform to buy and sell products easily.",
 };
 
 export default function RootLayout({
@@ -49,15 +52,17 @@ export default function RootLayout({
             <body
               className={`${geistSans.variable} ${poppins.variable} ${geistMono.variable} ${nunito.variable} `}
             >
-              <Navbar />
-              <div className="h-16" />
-              {children}
-              {modal}
-              <Toaster />
+              <ReduxProvider>
+                <Navbar />
+                <div className="h-16" />
+                {children}
+                {modal}
+                <Toaster />
+              </ReduxProvider >
             </body>
           </MuiThemeProvider>
         </AppRouterCacheProvider>
       </Providers>
-    </html>
+    </html >
   );
 }

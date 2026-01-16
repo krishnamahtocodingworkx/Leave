@@ -35,7 +35,7 @@ const Input: React.FC<InputFieldProps> = ({
                 onBlur={onBlur}
                 placeholder={placeHolder}
                 disabled={disabled}
-                className={`border rounded-md px-3 py-2 text-sm outline-none transition
+                className={`border rounded-lg px-3 py-2 text-sm outline-none transition
           ${showError
                         ? "border-red-500 focus:ring-1 focus:ring-red-500"
                         : "border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"

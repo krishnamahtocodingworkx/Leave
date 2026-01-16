@@ -14,20 +14,26 @@ import {
     nameRegExp,
 } from "./regex";
 
+// export const LoginSchema = () =>
+//     Yup.object().shape({
+//         email: Yup.string()
+//             .trim()
+//             .required("Enter the required field")
+//             .matches(emailRegExp, "Please enter valid Email"),
+//         password: Yup.string()
+//             .trim()
+//             .required("Enter the required field")
+//             .max(16, "Password should be maximum of 16 characters")
+//             .min(8, "Password should be minimum of 8 characters")
+//             .matches(passRegExp, passwordError),
+//     });
 export const LoginSchema = () =>
     Yup.object().shape({
-        email: Yup.string()
+        phoneNo: Yup.string()
             .trim()
             .required("Enter the required field")
-            .matches(emailRegExp, "Please enter valid Email"),
-        password: Yup.string()
-            .trim()
-            .required("Enter the required field")
-            .max(16, "Password should be maximum of 16 characters")
-            .min(8, "Password should be minimum of 8 characters")
-            .matches(passRegExp, passwordError),
+            .matches(phoneRegExp, "Please enter valid Phone Number"),
     });
-
 export const ForgotPasswordSchema = () =>
     Yup.object().shape({
         email: Yup.string()

@@ -10,23 +10,26 @@ import { useFormik } from "formik";
 import { LoginSchema } from "@/utils/schema";
 import RouteModal from "@/components/modals/RouteModal";
 import GoogleButton from "@/components/common/buttons/GoogleButton";
+import AuthButton from "@/components/common/buttons/AuthButton";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 export default function LoginModal() {
     const router = useRouter();
+    const { loading } = useSelector((state: RootState) => state.auth);
 
     const loginForm = useFormik({
         initialValues: {
-            email: "",
-            password: "",
+            phoneNo: "",
         },
         validationSchema: LoginSchema,
         validateOnBlur: true,
-        validateOnChange: false, // professional UX
         onSubmit: async (values, actions) => {
             try {
                 console.log("Login Payload:", values);
                 // await loginApi(values)
                 actions.resetForm();
+                router.push("/verify-otp");
                 // setOpen(false);
             } catch (error) {
                 console.error(error);
@@ -47,19 +50,19 @@ export default function LoginModal() {
                 </h2>
 
                 <Input
-                    name="email"
-                    type="email"
-                    label="Email"
+                    name="phoneNo"
+                    type="number"
+                    label="Phone Number"
                     required
-                    value={loginForm.values.email}
+                    value={loginForm.values.phoneNo}
                     changeHandler={loginForm.handleChange}
                     onBlur={loginForm.handleBlur}
-                    error={loginForm.errors.email}
-                    touched={loginForm.touched.email}
-                    placeHolder="Enter your email"
+                    error={loginForm.errors.phoneNo}
+                    touched={loginForm.touched.phoneNo}
+                    placeHolder="9999999999"
                 />
 
-                <PasswordInput
+                {/* <PasswordInput
                     name="password"
                     label="Password"
                     required
@@ -69,27 +72,11 @@ export default function LoginModal() {
                     error={loginForm.errors.password}
                     touched={loginForm.touched.password}
                     placeHolder="Enter your password"
-                />
+                /> */}
 
-                <button
-                    type="submit"
-                    disabled={loginForm.isSubmitting}
-                    className="bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
-                >
-                    {loginForm.isSubmitting ? "Logging in..." : "Login"}
-                </button>
-
-                <p className="text-sm text-gray-600 text-center">
-                    Don&apos;t have an account?{" "}
-                    <Link
-                        href="/signup"
-                        className="text-blue-500 underline"
-                    >
-                        Sign up
-                    </Link>
-                </p>
+                <AuthButton text="Login" loading={loading} />
             </form>
-            <GoogleButton />
+            {/* <GoogleButton /> */}
         </RouteModal>
     );
 }
