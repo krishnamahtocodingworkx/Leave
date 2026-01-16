@@ -1,21 +1,3 @@
-/* .bg-white shadow-sm px-5 */
-/* .navbar-container {
-  background: var(--color-white);
-  padding: 0px 2vw;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-} */
-
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -30,6 +12,7 @@
   z-index: 1000;
   transition: transform 0.4s ease-in-out;
   overflow: visible;
+  width: 100%;
 }
 
 .navbar-logo-container {
@@ -37,7 +20,6 @@
   height: 60px;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 2vw;
 }
 
@@ -174,11 +156,8 @@
     /* transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; */
   }
   .navbar-logo-container {
-    width: 150px; /* or your preferred fixed width */
-    height: 60px; /* fixed height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 150px;
+    height: 60px;
   }
 
   .navbar-logo {

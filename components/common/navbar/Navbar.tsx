@@ -81,7 +81,7 @@ const Navbar = () => {
                         router.push("/");
                     }}
                 /> */}
-                <Link href={"/"} aria-label='base route' className="font-poppins text-4xl font-bold"><span className='text-primary'>CWX</span><span className='text-warning'>Next</span></Link>
+                <Link href={"/"} aria-label='base route' className="font-poppins text-4xl font-bold"><span className='text-primary'>CW</span><span className='text-warning'>X</span></Link>
 
                 {/* <Link href={"/"} aria-label='base route' className="font-poppins text-4xl font-bold"><span className='text-primary'>still</span><span className='text-warning'>o</span></Link> */}
             </div>

@@ -11,11 +11,6 @@ export const navItems: NavItems[] = [
         icon: CgProfile,
     },
     {
-        name: "Signup",
-        href: "/signup",
-        icon: CgProfile,
-    },
-    {
         name: "Cart",
         href: "/cart",
         icon: FiShoppingCart,
