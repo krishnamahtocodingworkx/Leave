@@ -27,7 +27,7 @@ export default function SignupModal() {
                 </h2>
                 <div>
                     <p>We have sent a code sent to</p>
-                    <p>9876546587</p>
+                    <p className="text-warning">9876546587</p>
                 </div>
 
                 <OTPInput
@@ -38,7 +38,7 @@ export default function SignupModal() {
                     renderInput={(props) => <input {...props} />}
                     shouldAutoFocus={true}
                     inputType={"tel"}
-                    containerStyle={"otp-container"}
+                    containerStyle={"otp-container justify-center my-4"}
                     inputStyle={"otp-input-container"}
                 />
 

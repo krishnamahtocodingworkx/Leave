@@ -64,14 +64,15 @@ const Navbar = () => {
     }, [showMobileMenu]);
     return (
         <nav className='navbar'>
-            <div className="navbar-logo-container">
-                <div className="mobile-only-display  flex justify-center items-center">
-                    <HamburgerButton
-                        isOpen={showMobileMenu}
-                        toggle={() => setShowMobileMenu((prev) => !prev)}
-                    />
-                </div>
-                {/* <Image
+            <div className="navbar-logo-container flex justify-between w-full ">
+                <div className='flex items-center gap-2'>
+                    <div className="mobile-only-display  ">
+                        <HamburgerButton
+                            isOpen={showMobileMenu}
+                            toggle={() => setShowMobileMenu((prev) => !prev)}
+                        />
+                    </div>
+                    {/* <Image
                     src="/navbar-logo.svg"
                     height={30}
                     width={100}
@@ -81,15 +82,24 @@ const Navbar = () => {
                         router.push("/");
                     }}
                 /> */}
-                <Link href={"/"} aria-label='base route' className="font-poppins text-4xl font-bold"><span className='text-primary'>CW</span><span className='text-warning'>X</span></Link>
+                    <Link href={"/"} aria-label='base route' className="font-poppins text-4xl font-bold"><span className='text-primary'>CW</span><span className='text-warning'>X</span></Link>
 
-                {/* <Link href={"/"} aria-label='base route' className="font-poppins text-4xl font-bold"><span className='text-primary'>still</span><span className='text-warning'>o</span></Link> */}
+                    {/* <Link href={"/"} aria-label='base route' className="font-poppins text-4xl font-bold"><span className='text-primary'>still</span><span className='text-warning'>o</span></Link> */}
+                </div>
+
+                <Link
+                    href={"/login"}
+                    className={`mobile-only-display`}
+                >
+                    < CgProfile fontSize={24} />
+                </Link>
+
             </div>
 
-            {/* <div className='desktop-only-display flex items-center gap-2 my-2 px-4 py-2 rounded-2xl bg-input'>
+            <div className=' md:w-1/3 w-full flex items-center gap-2 my-2 px-4 py-2 rounded-xl bg-input'>
                 <FiSearch />
                 <input className='outline-none' placeholder='Search for products...' />
-            </div> */}
+            </div>
 
             <div className="nav-items-container desktop-only-display">
                 {navItems.map((item: NavItems, index) => {
@@ -149,22 +159,6 @@ const Navbar = () => {
                 </div>
             </div>
 
-
-
-            {/* <div className='flex items-center gap-5 text-2xl'>
-                <Link href={"/login"} className='flex items-center gap-2 text-lg'>
-                    <CgProfile />
-                    <p>Login</p>
-                </Link>
-                <Link href={"/"} className='flex items-center gap-2 text-lg'>
-                    <FiShoppingCart />
-                    <p>Cart</p>
-                </Link>
-                <Link href={"/"} className='flex items-center gap-2 text-lg'>
-                    <BsShop />
-                    <p>Sell Stuff</p>
-                </Link>
-            </div> */}
         </nav>
     )
 }
