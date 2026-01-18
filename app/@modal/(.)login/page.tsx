@@ -1,40 +1,33 @@
 "use client";
 
 import Input from "@/components/input";
-import PasswordInput from "@/components/input/PasswordInput";
-import CustomModal from "@/components/modals";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
 import { useFormik } from "formik";
 import { LoginSchema } from "@/utils/schema";
 import RouteModal from "@/components/modals/RouteModal";
-import GoogleButton from "@/components/common/buttons/GoogleButton";
 import AuthButton from "@/components/common/buttons/AuthButton";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store";
+import { sendOtp } from "@/store/auth/authThunk";
 
-export default function LoginModal() {
+export default function SendOtpModal() {
     const router = useRouter();
     const { loading } = useSelector((state: RootState) => state.auth);
+    const dispatch: AppDispatch = useDispatch();
 
     const loginForm = useFormik({
         initialValues: {
-            phoneNo: "",
+            phoneNumber: "",
         },
         validationSchema: LoginSchema,
         validateOnBlur: true,
         onSubmit: async (values, actions) => {
             try {
-                console.log("Login Payload:", values);
-                // await loginApi(values)
+                await dispatch(sendOtp({ phoneNumber: values.phoneNumber.toString() })).unwrap();
                 actions.resetForm();
-                router.push("/verify-otp");
-                // setOpen(false);
+                router.replace("/verify-otp");
             } catch (error) {
                 console.error(error);
-            } finally {
-                actions.setSubmitting(false);
             }
         },
     });
@@ -50,15 +43,15 @@ export default function LoginModal() {
                 </h2>
 
                 <Input
-                    name="phoneNo"
+                    name="phoneNumber"
                     type="number"
                     label="Phone Number"
                     required
-                    value={loginForm.values.phoneNo}
+                    value={loginForm.values.phoneNumber}
                     changeHandler={loginForm.handleChange}
                     onBlur={loginForm.handleBlur}
-                    error={loginForm.errors.phoneNo}
-                    touched={loginForm.touched.phoneNo}
+                    error={loginForm.errors.phoneNumber}
+                    touched={loginForm.touched.phoneNumber}
                     placeHolder="9999999999"
                 />
 

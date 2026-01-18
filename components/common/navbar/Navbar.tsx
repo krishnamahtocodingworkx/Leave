@@ -13,6 +13,7 @@ import { navItems } from '@/utils/constants';
 import { NavItems } from '@/utils/type';
 import { usePathname } from 'next/navigation';
 import gsap from "gsap";
+import { SHOW_ERROR_TOAST } from '@/utils/toasts';
 
 const Navbar = () => {
     const pathname = usePathname();
@@ -21,6 +22,40 @@ const Navbar = () => {
     const menuRef = useRef<HTMLDivElement>(null);
     const navItemsRef = useRef<HTMLAnchorElement[]>([]);
     const timelineRef = useRef<gsap.core.Timeline | null>(null);
+
+    async function fetchAddress(lat: number, long: number) {
+        try {
+            const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${long}&format=json`)
+            console.log("address response:", res);
+        } catch (error) {
+            console.log("error in address :", error);
+        }
+
+    }
+
+    const fetchLocation = () => {
+        if (!navigator.geolocation) {
+            SHOW_ERROR_TOAST("Geolocation is not supported by your browser");
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                console.log({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                });
+                // fetchAddress(position.coords.latitude, position.coords.longitude);
+            },
+            (err) => {
+                SHOW_ERROR_TOAST(err.message);
+            },
+            {
+                enableHighAccuracy: true,
+                // timeout: 10000,
+            }
+        );
+    };
 
     useEffect(() => {
         if (!menuContainerRef.current || !menuRef.current) return;
@@ -52,6 +87,7 @@ const Navbar = () => {
                 ease: "power2.out",
                 stagger: 0.08,
             });
+        fetchLocation();
     }, []);
 
     // Control animation direction
@@ -82,9 +118,9 @@ const Navbar = () => {
                         router.push("/");
                     }}
                 /> */}
-                    <Link href={"/"} aria-label='base route' className="font-poppins text-4xl font-bold"><span className='text-primary'>CW</span><span className='text-warning'>X</span></Link>
+                    {/* <Link href={"/"} aria-label='base route' className="font-poppins text-4xl font-bold"><span className='text-primary'>CW</span><span className='text-warning'>X</span></Link> */}
 
-                    {/* <Link href={"/"} aria-label='base route' className="font-poppins text-4xl font-bold"><span className='text-primary'>still</span><span className='text-warning'>o</span></Link> */}
+                    <Link href={"/"} aria-label='base route' className="font-poppins text-4xl font-bold"><span className='text-primary'>still</span><span className='text-warning'>o</span></Link>
                 </div>
 
                 <Link

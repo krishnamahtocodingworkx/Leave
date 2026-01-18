@@ -6,12 +6,12 @@ import { ProductCategories } from "@/utils/data";
 import { ProductCategoryType } from "@/utils/type";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import "./style.css";
 
 const CategoryCard = ({ category }: { category: ProductCategoryType }) => {
     const router = useRouter();
-    // onClick={() => router.push(category.value)}
     return (
-        <div className="category-card" >
+        <div className="category-card" onClick={() => router.push(category.value)} >
             <Image
                 src={category.imgUrl}
                 className="category-image"
@@ -25,7 +25,7 @@ const CategoryCard = ({ category }: { category: ProductCategoryType }) => {
                 <ExpandMoreRoundedIcon className="category-expand-icon" />
             </div>
 
-            <div className="category-options-container">
+            <div className="category-options-container" onClick={(e) => e.stopPropagation()}>
                 {category.options.map((option, idx) => (
                     <Link key={idx} className="category-option" href={`/${category.value}/${option.value}`} onClick={(e) => e.stopPropagation()}>
                         {option.label}

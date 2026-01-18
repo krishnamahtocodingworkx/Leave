@@ -4,11 +4,11 @@ import Categories from "@/components/catergories";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-8 py-3">
-      {/* <Categories />
+    <div className="flex flex-col gap-[1vw] py-3">
+      <Categories />
       <HomeBannerSlider />
-      <CardSlider /> */}
-      <h1>Home Page</h1>
+      <CardSlider />
+      {/* <h1>Home Page</h1> */}
     </div>
   );
 }

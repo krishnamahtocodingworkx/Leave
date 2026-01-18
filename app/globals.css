@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "./../components/catergories/style.css";
 
 :root {
   /* Base Colors */
@@ -117,4 +116,12 @@ input[type="number"] {
   /* background-color: var(--primary-light); */
   /* background-color: var(--secondary-light); */
   /* color: var(--secondary-color); */
+}
+
+
+@media (max-width: 768px) {
+  .category-expand-icon {
+    display: none !important;
+    border: 1px solid red;
+  }
 }

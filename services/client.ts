@@ -72,7 +72,7 @@ const createAxiosInstance = (
     // ✅ Attach token from cookies
     instance.interceptors.request.use(
         (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
-            const accessToken = store.getState().auth.accessToken;
+            const accessToken = store.getState().auth.token;
             if (accessToken) {
                 config.headers.set("Authorization", `Bearer ${accessToken}`);
             }
@@ -88,6 +88,7 @@ const createAxiosInstance = (
             return response;
         },
         (error): Promise<ErrorResponse> => {
+            console.log("error in interceptor :", error);
             const message =
                 error?.response?.data?.error?.message ||
                 error?.response?.data?.message ||
@@ -111,8 +112,8 @@ const createAxiosInstance = (
                     status: 0,
                 });
             }
-
-            if (status === 401) sessionExpireHandler();
+            console.log()
+            // if (status === 401) sessionExpireHandler();
 
             return Promise.reject({ message, status });
         }
@@ -158,7 +159,8 @@ const ApiService = {
 };
 
 // ✅ Clear cookie instead of localStorage
-const sessionExpireHandler = () => {
+export const sessionExpireHandler = () => {
+    console.log("Session Expired ❌❌❌")
     localStorage.clear();
     sessionStorage.clear();
     window.location.replace("/");

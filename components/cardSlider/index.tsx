@@ -20,7 +20,7 @@ const products = [
 export default function CardSlider() {
     return (
         <div className="relative px-6 ">
-            <p className="font-semibold text-2xl py-4">Nearest Products from you</p>
+            <p className="font-semibold text-2xl pb-2">Nearest Products from you</p>
             <Swiper
                 modules={[Navigation]}
                 navigation

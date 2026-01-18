@@ -54,7 +54,7 @@ export default function RootLayout({
             >
               <ReduxProvider>
                 <Navbar />
-                <div className="h-16" />
+                <div className="md:h-16 h-32" />
                 {children}
                 {modal}
                 <Toaster />

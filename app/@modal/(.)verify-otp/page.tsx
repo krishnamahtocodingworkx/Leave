@@ -2,19 +2,27 @@
 
 import AuthButton from "@/components/common/buttons/AuthButton";
 import RouteModal from "@/components/modals/RouteModal";
-import { RootState } from "@/store";
+import { AppDispatch, RootState } from "@/store";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import OTPInput from "react-otp-input";
+import { verifyOtp } from "@/store/auth/authThunk";
 
-export default function SignupModal() {
-    const { loading } = useSelector((state: RootState) => state.auth);
+export default function VerifyOtpModal() {
+    const { loading, user } = useSelector((state: RootState) => state.auth);
+    const phoneNumber = user?.phoneNumber || "";
+    const dispatch: AppDispatch = useDispatch();
     const router = useRouter();
     const [otp, setOtp] = React.useState("");
 
-    const handleVerify = () => {
-        router.push("/");
+    const handleVerify = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        await dispatch(
+            verifyOtp({ phoneNumber, otp })
+        ).unwrap().then(() => {
+            router.back();
+        });
     }
     return (
         <RouteModal>
@@ -27,7 +35,7 @@ export default function SignupModal() {
                 </h2>
                 <div>
                     <p>We have sent a code sent to</p>
-                    <p className="text-warning">9876546587</p>
+                    <p className="text-warning">{phoneNumber}</p>
                 </div>
 
                 <OTPInput

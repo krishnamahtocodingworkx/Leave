@@ -29,7 +29,7 @@ import {
 //     });
 export const LoginSchema = () =>
     Yup.object().shape({
-        phoneNo: Yup.string()
+        phoneNumber: Yup.string()
             .trim()
             .required("Enter the required field")
             .matches(phoneRegExp, "Please enter valid Phone Number"),

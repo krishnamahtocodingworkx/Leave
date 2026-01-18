@@ -17,7 +17,7 @@ const banners = [
 
 export default function HomeBannerSlider() {
     return (
-        <div className="relative w-full z-1">
+        <div className="relative w-full z-1 ">
             <Swiper
                 modules={[Navigation, Pagination, Autoplay]}
                 slidesPerView={1}
@@ -38,7 +38,7 @@ export default function HomeBannerSlider() {
                             width={1600}
                             height={500}
                             priority={index === 0}
-                            className="w-full h-[40vh] md:h-[55vh] object-cover"
+                            className="w-full h-[18vh] md:h-[30vh] object-cover"
                         />
                     </SwiperSlide>
                 ))}

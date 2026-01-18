@@ -3,20 +3,19 @@
   display: flex;
   justify-content: center;
   gap: 24px;
-  padding: 24px;
-  position: relative; /* creates stacking context */
+  padding: 1vw;
+  position: relative;
   z-index: 10;
-  width: 100%;
+  width: 100vw;
 }
 
 /* ================= Card ================= */
 .category-card {
   position: relative;
-  width: 140px;
-  padding: 16px 12px;
+  padding: 1vw;
   background: white;
   border-radius: 14px;
-  border: 1px solid var(--color-border-default);
+  /* border: 1px solid var(--color-border-default); */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,8 +31,8 @@
 
 /* ================= Image ================= */
 .category-image {
-  width: 64px;
-  height: 64px;
+  width: 54px;
+  height: 54px;
   object-fit: contain;
 }
 
@@ -109,12 +108,20 @@
 @media (max-width: 768px) {
   .categories-section {
     justify-content: start;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    /* flex-wrap: nowrap; */
   }
   .category-card {
-    width: 120px;
+    width: 200px !important;
     padding: 12px 12px;
-    gap: 5px;
+    /* display: grid; */
+    /* grid-template-columns: repeat(8, 1fr); */
+    gap: 12px;
+    /* grid-template-columns: auto 1fr; */
+    /* gap: 5px;
     justify-content: space-between;
+    border: 1px solid green; */
   }
   .category-title {
     font-size: 12px;

@@ -1,33 +1,42 @@
+import { AuthSlice } from "@/utils/modal";
 import { createSlice } from "@reduxjs/toolkit";
+import { verifyOtp, sendOtp } from "./authThunk";
+
+const initialState: AuthSlice = {
+    user: null,
+    loading: false,
+    token: null
+}
 
 const authSlice = createSlice({
     name: "auth",
-    initialState: {
-        loading: false,
-        isAuthenticated: false,
-        user: null,
-        accessToken: null,
-    },
+    initialState: initialState,
     reducers: {
-        loginStart(state) {
-            state.loading = true;
-        },
-        loginSuccess(state, action) {
-            state.loading = false;
-            state.isAuthenticated = true;
-            state.user = action.payload;
-        },
-        loginFailure(state) {
-            state.loading = false;
-            state.isAuthenticated = false;
-            state.user = null;
-        },
-        logout(state) {
-            state.isAuthenticated = false;
-            state.user = null;
-        }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(sendOtp.pending, (state) => {
+                state.loading = true;
+            }).addCase(sendOtp.fulfilled, (state, action) => {
+                state.user = action.payload;
+                state.loading = false;
+            }).addCase(sendOtp.rejected, (state) => {
+                state.loading = false;
+            })
+
+        builder
+            .addCase(verifyOtp.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(verifyOtp.fulfilled, (state, action) => {
+                state.loading = false;
+                // state.user = action.payload.user;
+                // state.token = action.payload.token;
+            }).addCase(verifyOtp.rejected, (state) => {
+                state.loading = false;
+            });
     }
 })
 
-export const { loginStart, loginSuccess, loginFailure, logout } = authSlice.actions;
+export const { } = authSlice.actions;
 export default authSlice.reducer;
