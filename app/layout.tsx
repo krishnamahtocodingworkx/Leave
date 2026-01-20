@@ -31,10 +31,10 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  // title: "Stillo - Buy and Sell Products",
-  title: "CW-NextJS Template",
-  description: "A Next.js template with MUI, Tailwind CSS, and Google Fonts integration.",
-  // description: "An e-commerce platform to buy and sell products easily.",
+  title: "Stillo - Buy and Sell Products",
+  // title: "CW-NextJS Template",
+  // description: "A Next.js template with MUI, Tailwind CSS, and Google Fonts integration.",
+  description: "An e-commerce platform to buy and sell products easily.",
 };
 
 export default function RootLayout({

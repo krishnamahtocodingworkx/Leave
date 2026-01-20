@@ -5,13 +5,17 @@ import { verifyOtp, sendOtp } from "./authThunk";
 const initialState: AuthSlice = {
     user: null,
     loading: false,
-    token: null
+    token: null,
+    ownLocation: null
 }
 
 const authSlice = createSlice({
     name: "auth",
     initialState: initialState,
     reducers: {
+        saveOwnLocation: (state, action) => {
+            state.ownLocation = action.payload
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -30,13 +34,13 @@ const authSlice = createSlice({
             })
             .addCase(verifyOtp.fulfilled, (state, action) => {
                 state.loading = false;
-                // state.user = action.payload.user;
-                // state.token = action.payload.token;
+                state.user = action.payload.user;
+                state.token = action.payload.token;
             }).addCase(verifyOtp.rejected, (state) => {
                 state.loading = false;
             });
     }
 })
 
-export const { } = authSlice.actions;
+export const { saveOwnLocation } = authSlice.actions;
 export default authSlice.reducer;

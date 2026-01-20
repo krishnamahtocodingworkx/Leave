@@ -31,10 +31,10 @@ export type ErrorResponse = {
 /**
  * Extract error message (same logic as axios version)
  */
-export const extractErrorMessage = (
+export const extractErrorMessage = async (
     error: unknown,
     fallback: string
-): string => {
+): Promise<string> => {
     if (error instanceof Error) return error.message;
     if (typeof error === "string") return error;
     return fallback;
@@ -102,7 +102,7 @@ async function fetchWrapper<T>(
         }
 
         throw {
-            message: extractErrorMessage(error, SOMETHING_WENT_WRONG),
+            message: await extractErrorMessage(error, SOMETHING_WENT_WRONG),
             status: error?.status || 0,
         };
     } finally {

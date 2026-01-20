@@ -1,10 +1,9 @@
 "use client";
 import React, { useEffect, useRef, useState } from 'react'
-import { CgProfile } from "react-icons/cg";
 import { FiSearch } from "react-icons/fi";
 import { FiShoppingCart } from "react-icons/fi";
-import { BsShop } from "react-icons/bs";
-import { IoBagAdd } from "react-icons/io5";
+import { CgProfile } from "react-icons/cg";
+import { IoAdd } from "react-icons/io5";
 
 import "./Navbar.css";
 import Link from 'next/link';
@@ -14,6 +13,11 @@ import { NavItems } from '@/utils/type';
 import { usePathname } from 'next/navigation';
 import gsap from "gsap";
 import { SHOW_ERROR_TOAST } from '@/utils/toasts';
+import { userServices } from '@/services/user.service';
+import { LocationResult } from '@/utils/modal';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/store';
+import { saveOwnLocation } from '@/store/auth/authSlice';
 
 const Navbar = () => {
     const pathname = usePathname();
@@ -22,16 +26,8 @@ const Navbar = () => {
     const menuRef = useRef<HTMLDivElement>(null);
     const navItemsRef = useRef<HTMLAnchorElement[]>([]);
     const timelineRef = useRef<gsap.core.Timeline | null>(null);
-
-    async function fetchAddress(lat: number, long: number) {
-        try {
-            const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${long}&format=json`)
-            console.log("address response:", res);
-        } catch (error) {
-            console.log("error in address :", error);
-        }
-
-    }
+    const { token, ownLocation } = useSelector((state: RootState) => state.auth);
+    const dispatch: AppDispatch = useDispatch();
 
     const fetchLocation = () => {
         if (!navigator.geolocation) {
@@ -40,21 +36,39 @@ const Navbar = () => {
         }
 
         navigator.geolocation.getCurrentPosition(
-            (position) => {
-                console.log({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
-                });
-                // fetchAddress(position.coords.latitude, position.coords.longitude);
+            async (position) => {
+                try {
+                    const { latitude, longitude } = position.coords;
+
+                    const data = await userServices.fetchOwnAddress(latitude, longitude) as LocationResult;
+
+                    if (!data) {
+                        SHOW_ERROR_TOAST("Unable to fetch address");
+                        return;
+                    }
+
+                    console.log("my address:", data);
+                    dispatch(saveOwnLocation(data));
+
+                    const dataToSend = {
+                        lat: Number(data.lat),
+                        lng: Number(data.lon),
+                        address: data.display_name,
+                    };
+                    console.log("token :", token);
+                    if (token && token.length && !ownLocation) await userServices.saveOwnLocation(dataToSend);
+                } catch (error: unknown) {
+                    SHOW_ERROR_TOAST(
+                        error instanceof Error ? error.message : "Something went wrong"
+                    );
+                }
             },
             (err) => {
                 SHOW_ERROR_TOAST(err.message);
             },
-            {
-                enableHighAccuracy: true,
-                // timeout: 10000,
-            }
+            { enableHighAccuracy: true }
         );
+
     };
 
     useEffect(() => {
@@ -154,6 +168,30 @@ const Navbar = () => {
                         </Link>
                     );
                 })}
+                {
+                    token && <Link
+                        href={"add-products"}
+                        className={`nav-item ${pathname === "/add-products" ? "active-nav-item" : ""} flex items-center gap-2`}
+                    >
+                        <span className="nav-item-icon">{<IoAdd />}</span>
+                        {"Add Products"}
+                    </Link>
+                }
+                {
+                    token ? <Link
+                        href={"/profile"}
+                        className={`nav-item ${pathname === "/profile" ? "active-nav-item" : ""} flex items-center gap-2`}
+                    >
+                        <span className="nav-item-icon">{<CgProfile />}</span>
+                        {"Profile"}
+                    </Link> : <Link
+                        href={"/login"}
+                        className={`nav-item ${pathname === "/profile" ? "active-nav-item" : ""} flex items-center gap-2`}
+                    >
+                        <span className="nav-item-icon">{<CgProfile />}</span>
+                        {"Login"}
+                    </Link>
+                }
             </div>
 
 
