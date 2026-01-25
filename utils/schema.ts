@@ -13,6 +13,7 @@ import {
     phoneRegExp,
     nameRegExp,
 } from "./regex";
+import { ProductCategory, ProductSubCategory } from "./enum";
 
 // export const LoginSchema = () =>
 //     Yup.object().shape({
@@ -86,4 +87,11 @@ export const ChangePasswordSchema = () =>
                 [Yup.ref("newPassword")],
                 "Password and Confirm Password must match"
             ),
+    });
+export const categorySchema =
+    Yup.object({
+        category: Yup.string()
+            .required("Please select your item category to continue"),
+        subCategory: Yup.string()
+            .required("Please select your item sub category to continue")
     });

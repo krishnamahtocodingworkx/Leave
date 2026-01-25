@@ -58,9 +58,7 @@ const Navbar = () => {
                     console.log("token :", token);
                     if (token && token.length && !ownLocation) await userServices.saveOwnLocation(dataToSend);
                 } catch (error: unknown) {
-                    SHOW_ERROR_TOAST(
-                        error instanceof Error ? error.message : "Something went wrong"
-                    );
+                    console.log("error :", error);
                 }
             },
             (err) => {
@@ -170,11 +168,11 @@ const Navbar = () => {
                 })}
                 {
                     token && <Link
-                        href={"add-products"}
-                        className={`nav-item ${pathname === "/add-products" ? "active-nav-item" : ""} flex items-center gap-2`}
+                        href={"sell"}
+                        className={`nav-item ${pathname === "/sell" ? "active-nav-item" : ""} flex items-center gap-2`}
                     >
                         <span className="nav-item-icon">{<IoAdd />}</span>
-                        {"Add Products"}
+                        {"Sell"}
                     </Link>
                 }
                 {

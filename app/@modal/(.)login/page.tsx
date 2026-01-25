@@ -26,8 +26,7 @@ export default function SendOtpModal() {
                 await dispatch(sendOtp({ phoneNumber: values.phoneNumber.toString() })).unwrap();
                 actions.resetForm();
                 router.replace("/verify-otp");
-            } catch (error) {
-                console.error(error);
+            } catch (_) {
             }
         },
     });

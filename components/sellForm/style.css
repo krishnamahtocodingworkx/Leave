@@ -1,0 +1,6 @@
+.form-container {
+  padding: 5vw 10vw 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 5vw;
+}

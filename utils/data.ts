@@ -81,3 +81,10 @@ export const ProductCategories: ProductCategoryType[] = [
         ]
     },
 ]
+
+export const sellProductSteps = [
+    "Category",
+    "About",
+    "Media",
+    "Confirmation"
+]
