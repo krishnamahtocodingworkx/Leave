@@ -1,4 +1,4 @@
-import { ProductCategory, ProductSubCategory } from "./enum";
+import { ProductCategory, ProductCondition, ProductSubCategory } from "./enum";
 import { IMAGES } from "./images";
 import { ProductCategoryType } from "./type";
 
@@ -87,4 +87,11 @@ export const sellProductSteps = [
     "About",
     "Media",
     "Confirmation"
+]
+
+export const ProductConditionOptions = [
+    { label: "New", value: ProductCondition.NEW },
+    { label: "Like New", value: ProductCondition.LIKE_NEW },
+    { label: "Used", value: ProductCondition.USED },
+    { label: "Heavily Used", value: ProductCondition.HEAVILY_USED },
 ]

@@ -1,6 +1,5 @@
 .form-container {
-  padding: 5vw 10vw 0px;
+  padding: 5vw 10vw;
   display: flex;
-  flex-direction: column;
-  gap: 5vw;
+  flex-direction: row-reverse;
 }

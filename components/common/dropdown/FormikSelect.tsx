@@ -22,6 +22,7 @@ type SelectFieldProps = {
     error?: boolean;
     helperText?: string;
     disabled?: boolean;
+    required?: boolean;
 };
 
 const SelectField = ({
@@ -34,6 +35,7 @@ const SelectField = ({
     error = false,
     helperText = "",
     disabled = false,
+    required = false,
 }: SelectFieldProps) => {
     return (
         <FormControl fullWidth error={error}>

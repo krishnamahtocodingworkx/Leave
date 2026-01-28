@@ -1,7 +1,21 @@
 import React from "react";
 import { InputFieldProps } from "@/utils/type";
 
-const Input: React.FC<InputFieldProps> = ({
+export interface TextAreaFieldProps {
+    name: string;
+    value: string;
+    changeHandler: React.ChangeEventHandler<HTMLTextAreaElement>;
+    onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
+    label?: string;
+    required?: boolean;
+    error?: string;
+    touched?: boolean;
+    placeHolder?: string;
+    disabled?: boolean;
+    rows?: number;
+}
+
+const TextArea: React.FC<TextAreaFieldProps> = ({
     name,
     value,
     changeHandler,
@@ -10,7 +24,6 @@ const Input: React.FC<InputFieldProps> = ({
     required,
     error,
     touched,
-    type = "text",
     placeHolder,
     disabled,
 }) => {
@@ -25,16 +38,16 @@ const Input: React.FC<InputFieldProps> = ({
                 </label>
             )}
 
-            <input
+            <textarea
                 id={name}
                 name={name}
-                type={type}
                 value={value}
                 onChange={changeHandler}
                 onBlur={onBlur}
                 placeholder={placeHolder}
                 disabled={disabled}
-                className={`border rounded-lg px-3 py-2 text-sm outline-none transition
+                rows={4}
+                className={`border rounded-lg px-3 py-2 text-sm outline-none transition resize-none
           ${showError
                         ? "border-red-500 focus:ring-1 focus:ring-red-500"
                         : "border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
@@ -47,4 +60,4 @@ const Input: React.FC<InputFieldProps> = ({
     );
 };
 
-export default Input;
+export default TextArea;

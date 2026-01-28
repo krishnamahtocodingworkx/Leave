@@ -22,7 +22,7 @@ const CategoryCard = ({ category }: { category: ProductCategoryType }) => {
 
             <div className="category-title-row">
                 <span className="category-title">{category.label}</span>
-                <ExpandMoreRoundedIcon className="category-expand-icon" />
+                <div className="category-expand-icon"><ExpandMoreRoundedIcon /></div>
             </div>
 
             <div className="category-options-container" onClick={(e) => e.stopPropagation()}>
