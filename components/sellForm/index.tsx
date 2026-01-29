@@ -13,8 +13,12 @@ import { aboutItemSchema, categorySchema } from '@/utils/schema';
 import SelectField from '../common/dropdown/FormikSelect';
 import Input from '../input';
 import TextArea from '../input/TextArea';
+import MediaDropzone from '../input/MediaDropzone';
+import { SHOW_ERROR_TOAST } from '@/utils/toasts';
+import VerifyDetails from './VerifyDetails';
 
 const SellForm = () => {
+    const [mediaFiles, setMediaFiles] = useState<File[]>([]);
     const [step, setStep] = useState(0);
     const categoryForm = useFormik({
         initialValues: { category: "", subCategory: "" },
@@ -36,7 +40,7 @@ const SellForm = () => {
         validationSchema: aboutItemSchema,
         onSubmit: (value, action) => {
             console.log("values :", value)
-
+            setStep(2);
         }
     })
     const [subCatOpt, setSubCatOpt] = useState<{ label: string, value: ProductSubCategory }[]>([]);
@@ -47,10 +51,59 @@ const SellForm = () => {
             setSubCatOpt(subCatOption?.options);
     }
 
+    function buildFormData() {
+        const formData = new FormData();
+
+        // category
+        formData.append("category", categoryForm.values.category);
+        formData.append("subCategory", categoryForm.values.subCategory);
+
+        // about item
+        Object.entries(aboutForm.values).forEach(([key, value]) => {
+            formData.append(key, value);
+        });
+
+        // media
+        mediaFiles.forEach((file) => {
+            formData.append("media", file);
+        });
+
+        return formData;
+    }
+
+
     function saveHandler(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        if (step === 0) categoryForm.handleSubmit();
-        if (step === 1) aboutForm.handleSubmit();
+        switch (step) {
+            case 0:
+                categoryForm.handleSubmit();
+                break;
+            case 1:
+                aboutForm.handleSubmit();
+                break;
+            case 2:
+                if (mediaFiles.length === 0) {
+                    SHOW_ERROR_TOAST("Please upload at least one media file.");
+                    return;
+                } else {
+                    setStep(3);
+                }
+                break;
+            case 3:
+                const formData = buildFormData();
+
+                // DEBUG (optional)
+                for (const [key, value] of formData.entries()) {
+                    console.log(key, value);
+                }
+
+                // 👉 API CALL HERE
+                // await fetch("/api/sell", { method: "POST", body: formData })
+                break;
+            default:
+                break;
+        }
+
     }
 
     return (
@@ -67,13 +120,21 @@ const SellForm = () => {
                 </Stepper>
             </Box>
             <form className='form-container ' onSubmit={saveHandler}>
-                <div className=' flex-1   '>
-                    <Button type='submit' sx={{ borderRadius: 2, px: 2, py: 1, width: "100%" }} disableElevation variant='contained'>Continue</Button>
+                <div className=' flex-1  flex flex-col gap-4 '>
+                    <Button type='submit' sx={{ borderRadius: 2, px: 2, py: 1, width: "100%" }} disableElevation variant='contained'>{step === 3 ? "Save" : "Continue"}</Button>
+                    {
+                        step > 0 && <Button onClick={() => setStep(prev => prev - 1)} sx={{ borderRadius: 2, px: 2, py: 1, width: "100%" }} disableElevation variant='outlined'>Back</Button>
+                    }
                 </div>
                 <div className='flex-3  md:px-[20%]'>
                     {
                         step === 0 &&
-                        (<Box sx={{ display: "flex", flexDirection: "column", gap: 2, }}>
+                        (<Box sx={{
+                            display: "flex", flexDirection: "column", gap: {
+                                xs: 2,
+                                md: 5
+                            },
+                        }}>
                             <SelectField
                                 name="category"
                                 label="Select Item Category"
@@ -175,6 +236,29 @@ const SellForm = () => {
                                 />
                             </Box>)
                     }
+                    {
+                        step === 2 && (
+                            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                                <h1 className="text-lg font-semibold">Upload Images / Videos</h1>
+
+                                <MediaDropzone
+                                    onChange={(files) => setMediaFiles(files)}
+                                />
+                            </Box>
+                        )
+                    }
+                    {
+                        step === 3 && (
+                            <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                                <VerifyDetails
+                                    categoryData={categoryForm.values}
+                                    aboutData={aboutForm.values}
+                                    mediaFiles={mediaFiles}
+                                />
+                            </Box>
+                        )
+                    }
+
                 </div>
             </form>
 
