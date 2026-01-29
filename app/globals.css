@@ -122,10 +122,21 @@ input[type="number"] {
   /* color: var(--secondary-color); */
 }
 
-
 @media (max-width: 768px) {
   .category-expand-icon {
     display: none !important;
     border: 1px solid red;
   }
+}
+
+.page--wrapper {
+  /* min-h-screen w-full flex flex-col bg-white mt-3 px-10 py-5 gap-5 */
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+  margin-top: 1vw;
+  padding: 1vw 5vw;
+  gap: 10px;
 }

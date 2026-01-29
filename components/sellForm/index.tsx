@@ -66,14 +66,14 @@ const SellForm = () => {
                     }
                 </Stepper>
             </Box>
-            <form className='form-container border' onSubmit={saveHandler}>
-                <div className=' flex-1   border'>
+            <form className='form-container ' onSubmit={saveHandler}>
+                <div className=' flex-1   '>
                     <Button type='submit' sx={{ borderRadius: 2, px: 2, py: 1, width: "100%" }} disableElevation variant='contained'>Continue</Button>
                 </div>
-                <div className='flex-3 border px-[20%]'>
+                <div className='flex-3  md:px-[20%]'>
                     {
                         step === 0 &&
-                        (<Box sx={{ display: "flex", flexDirection: "column", gap: 5, }}>
+                        (<Box sx={{ display: "flex", flexDirection: "column", gap: 2, }}>
                             <SelectField
                                 name="category"
                                 label="Select Item Category"
@@ -109,7 +109,7 @@ const SellForm = () => {
                     }
                     {
                         step === 1 && (
-                            <Box sx={{ display: "flex", flexDirection: "column", gap: 5, }}>
+                            <Box sx={{ display: "flex", flexDirection: "column", gap: 2, }}>
                                 <Input
                                     name='itemName'
                                     error={aboutForm.errors.itemName}
