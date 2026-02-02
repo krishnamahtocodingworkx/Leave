@@ -50,8 +50,8 @@ const SelectField = ({
                 onBlur={onBlur}
                 sx={{ borderRadius: 2 }}
             >
-                {options.map((opt) => (
-                    <MenuItem key={opt.value} value={opt.value}>
+                {options.map((opt, i) => (
+                    <MenuItem key={opt.value + "" + i} value={opt.value}>
                         {opt.label}
                     </MenuItem>
                 ))}

@@ -84,10 +84,21 @@ export const ProductCategories: ProductCategoryType[] = [
 
 export const sellProductSteps = [
     "Category",
-    "About",
+    "Details",
     "Media",
-    "Confirmation"
-]
+    "Location",
+    "Publish"
+];
+// export const sellProductSteps = [
+//     "Category",
+//     "Product Details",
+//     "Media",
+//     "Pickup Address",
+//     "Review & Publish"
+// ];
+
+
+
 
 export const ProductConditionOptions = [
     { label: "New", value: ProductCondition.NEW },

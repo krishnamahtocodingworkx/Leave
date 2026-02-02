@@ -28,5 +28,28 @@ export const userServices = {
         } catch (error) {
             console.log("initial location error :", error);
         }
+    },
+    getAllAddress: async function () {
+        try {
+            const res = await ApiService.get(
+                ENDPOINTS.GET_ALL_ADDRESS
+            );
+            console.log("all address response :", res);
+            return res.data;
+        } catch (error) {
+            console.log("error in fetching all address:", error);
+            throw error;
+        }
+    },
+    /* eslint-disable */
+    addAddress: async function (payload: any) {
+        try {
+            const res = await ApiService.post(ENDPOINTS.ADD_ADDRESS, payload);
+            console.log("add address response :", res);
+            return res.data;
+        } catch (error) {
+            console.log("error in adding address:", error);
+            throw error;
+        }
     }
 }

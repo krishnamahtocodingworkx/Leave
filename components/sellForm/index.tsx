@@ -16,10 +16,13 @@ import TextArea from '../input/TextArea';
 import MediaDropzone from '../input/MediaDropzone';
 import { SHOW_ERROR_TOAST } from '@/utils/toasts';
 import VerifyDetails from './VerifyDetails';
+import Address from './Address';
+
+
 
 const SellForm = () => {
     const [mediaFiles, setMediaFiles] = useState<File[]>([]);
-    const [step, setStep] = useState(0);
+    const [step, setStep] = useState(3);
     const categoryForm = useFormik({
         initialValues: { category: "", subCategory: "" },
         validationSchema: categorySchema,
@@ -72,8 +75,7 @@ const SellForm = () => {
     }
 
 
-    function saveHandler(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
+    function saveHandler() {
         switch (step) {
             case 0:
                 categoryForm.handleSubmit();
@@ -90,6 +92,9 @@ const SellForm = () => {
                 }
                 break;
             case 3:
+                setStep(4);
+                break;
+            case 4:
                 const formData = buildFormData();
 
                 // DEBUG (optional)
@@ -119,9 +124,9 @@ const SellForm = () => {
                     }
                 </Stepper>
             </Box>
-            <form className='form-container ' onSubmit={saveHandler}>
+            <div className='form-container ' >
                 <div className=' flex-1  flex flex-col gap-4 '>
-                    <Button type='submit' sx={{ borderRadius: 2, px: 2, py: 1, width: "100%" }} disableElevation variant='contained'>{step === 3 ? "Save" : "Continue"}</Button>
+                    <Button onClick={saveHandler} sx={{ borderRadius: 2, px: 2, py: 1, width: "100%" }} disableElevation variant='contained'>{step === 4 ? "Save" : "Continue"}</Button>
                     {
                         step > 0 && <Button onClick={() => setStep(prev => prev - 1)} sx={{ borderRadius: 2, px: 2, py: 1, width: "100%" }} disableElevation variant='outlined'>Back</Button>
                     }
@@ -249,6 +254,15 @@ const SellForm = () => {
                     }
                     {
                         step === 3 && (
+                            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                                <h1 className="text-lg font-semibold">Address</h1>
+
+                                <Address />
+                            </Box>
+                        )
+                    }
+                    {
+                        step === 4 && (
                             <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
                                 <VerifyDetails
                                     categoryData={categoryForm.values}
@@ -260,7 +274,7 @@ const SellForm = () => {
                     }
 
                 </div>
-            </form>
+            </div>
 
 
         </section >

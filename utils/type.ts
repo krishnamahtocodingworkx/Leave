@@ -8,8 +8,8 @@ export type ProductCategoryType = { label: string, value: ProductCategory, imgUr
 export interface InputFieldProps {
     name: string;
     value: string;
-    changeHandler: React.ChangeEventHandler<HTMLInputElement>;
-    onBlur: React.FocusEventHandler<HTMLInputElement>;
+    changeHandler?: React.ChangeEventHandler<HTMLInputElement>;
+    onBlur?: React.FocusEventHandler<HTMLInputElement>;
     label?: string;
     placeHolder?: string;
     required?: boolean;

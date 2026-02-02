@@ -48,6 +48,7 @@ const Navbar = () => {
                     }
 
                     console.log("my address:", data);
+                    // debugger;
                     dispatch(saveOwnLocation(data));
 
                     const dataToSend = {
@@ -56,7 +57,8 @@ const Navbar = () => {
                         address: data.display_name,
                     };
                     console.log("token :", token);
-                    if (token && token.length && !ownLocation) await userServices.saveOwnLocation(dataToSend);
+                    if (token && token.length && !ownLocation)
+                         await userServices.saveOwnLocation(dataToSend);
                 } catch (error: unknown) {
                     console.log("error :", error);
                 }

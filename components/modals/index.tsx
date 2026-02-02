@@ -1,6 +1,7 @@
 "use client";
 import React, { ReactNode } from "react";
 import { IoClose } from "react-icons/io5";
+import AuthButton from "../common/buttons/AuthButton";
 // import { STRING } from "@/utils/string";
 
 type CustomModalProps = {
@@ -48,17 +49,7 @@ const CustomModal = ({
                         {title && <h1 className="heading">{title}</h1>}
                         {children}
                         {submitButtonText && (
-                            <div>
-                                <button
-                                    type="submit"
-                                    className="primary-button"
-                                    disabled={loading}
-                                >
-                                    {loading
-                                        ? submitButtonLoadingText || "loading..."
-                                        : submitButtonText}
-                                </button>
-                            </div>
+                            <AuthButton loading={loading} text={loading ? submitButtonLoadingText || "saving" : submitButtonText} />
                         )}
                     </form>
                 ) : (
